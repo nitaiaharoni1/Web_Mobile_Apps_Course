@@ -26,7 +26,7 @@ var q2 = function () {
 };
 
 function q3() {
-    function ObjectFactory(func, desc) {
+    function ObjectFactory() {
         return {
             doSomething: function () {
                 var k = {k: 1};
@@ -40,14 +40,12 @@ function q3() {
                 var c = Object.create(d);
                 var b = Object.create(c);
                 var a = Object.create(b);
-                var array = [a, b, c, d, e, f, g, h, i, j, k];
-                return array;
+                return [a, b, c, d, e, f, g, h, i, j, k];
             },
 
             desc: "doSomething returns an array of 10 empty objects (a to k) that are structured as the following prototype-chain a->b->c->d->e->f->g->i->j->k"
         }
-    };
-
+    }
     return new ObjectFactory();
 }
 
