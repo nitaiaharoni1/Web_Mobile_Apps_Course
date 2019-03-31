@@ -1,7 +1,7 @@
 var q1 = function () {
     var doSomething = function () {
     };
-    var desc = "string : a description of what doSomething() is doing and why let changes it";
+    var desc = "a description of what doSomething() is doing and why let changes it";
     return {
         "doSomething": doSomething,
         "desc": desc
