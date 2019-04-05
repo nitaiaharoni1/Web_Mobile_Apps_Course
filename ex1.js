@@ -1,5 +1,6 @@
-var q1 = function () {
+var q1 = function (imgId) {
     var doSomething = function () {
+        console.log(id)
     };
     var desc = "a description of what doSomething() is doing and why let changes it";
     return {
