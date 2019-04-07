@@ -83,7 +83,7 @@ var q1 = function () {
         document.my_age.secs.value = parseInt(Age / 1000, 10);
     }
 
-    var desc = "doSomething() contains 4 different functions: startit - calculates accurate age in years/months/days/hours/minutes/secondes and uses utility function called writeyourAge, stopit - clears the time was calculated, alertFlippedId - gets the id text of the image and alerts the flipped string";
+    var desc = "doSomething() contains 4 different functions: startit - calculates accurate age in years/months/days/hours/minutes/secondes and uses utility function called writeyourAge, stopit - clears the time was calculated, alertFlippedId - gets the id text of the image and alerts the flipped stringץ";
 
     return {
         "doSomething": doSomething,
