@@ -1,8 +1,86 @@
-var q1 = function (imgId) {
-    var doSomething = function () {
-        console.log(id)
+var q1 = function () {
+    var doSomething = function (op) {
+        if (op == "start") {
+            startit()
+        } else if (op == "stop") {
+            stopit();
+        } else {
+            let flippedStr = "";
+            for (let i = 0; i < op.length ; i++) {
+                if (op.charAt(i) == op.charAt(i).toLocaleUpperCase()) {
+                    flippedStr += op.charAt(i).toLocaleLowerCase();
+                } else{
+                    flippedStr += op.charAt(i).toLocaleUpperCase();
+                }
+            }
+            alert("Flliped picture id is: " + flippedStr)
+        }
+
+        function stopit() {
+            document.my_age.yrs.value = "";
+            document.my_age.dys.value = "";
+            document.my_age.hrs.value = "";
+            document.my_age.mins.value = "";
+            document.my_age.secs.value = "";
+        };
+
+        function startit() {
+            var today = new Date();
+            var curyear = today.getYear();
+            if (curyear < 1000)
+                curyear += 1900;
+            var display_value = " Time:  " + curyear;
+            if (today.getMinutes() < 10) {
+                display_value += ":0" + today.getMinutes();
+            } else {
+                display_value += ":" + today.getMinutes();
+            }
+            if (today.getSeconds() < 10) {
+                display_value += ":0" + today.getSeconds();
+            } else {
+                display_value += ":" + today.getSeconds();
+            }
+            if
+            (today.getHours() >= 12) {
+                display_value += " P.M.  "
+            } else {
+                display_value += " A.M.  "
+            }
+            display_value += " Date:  " + (today.getMonth() + 1) + "/" + today.getDate() + "/" + curyear;
+            window.status = display_value;
+            writeyourAge();
+        };
+
+        function writeyourAge() {
+            TheDate = new Date();
+            Month = TheDate.getMonth();
+            Day = TheDate.getDate();
+            Year = TheDate.getYear();
+            if (Year < 1000)
+                Year += 1900;
+            Hour = TheDate.getHours();
+            Minute = TheDate.getMinutes();
+            Second = TheDate.getSeconds();
+            byear = (document.my_age.birthy.value);
+            bm = (document.my_age.birthm.value);
+            bd = (document.my_age.birthd.value);
+            BDate = Date.UTC(byear, bm, bd, 0, 0, 0);
+            if (Year < 2000) {
+                CDate = Date.UTC(Year, Month, Day, Hour, Minute, Second);
+            } else {
+                CDate = Date.UTC(Year, Month, Day, Hour, Minute, Second);
+            }
+            Age = CDate - BDate + (1000 * 60 * 60 * 24 * 30);
+            document.my_age.yrs.value = parseInt(((((Age / 1000) / 60) / 60) / 24) / 365.25, 10);
+            document.my_age.dys.value = parseInt((((Age / 1000) / 60) / 60) / 24, 10);
+            document.my_age.hrs.value = parseInt(((Age / 1000) / 60) / 60, 10);
+            document.my_age.mins.value = parseInt((Age / 1000) / 60, 10);
+            document.my_age.secs.value = parseInt(Age / 1000, 10);
+        }
+
     };
     var desc = "a description of what doSomething() is doing and why let changes it";
+
     return {
         "doSomething": doSomething,
         "desc": desc
@@ -47,6 +125,7 @@ function q3() {
             desc: "doSomething returns an array of 10 empty objects (a to k) that are structured as the following prototype-chain a->b->c->d->e->f->g->i->j->k"
         }
     }
+
     return new ObjectFactory();
 }
 
