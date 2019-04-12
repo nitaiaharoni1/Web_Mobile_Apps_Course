@@ -1,0 +1,36 @@
+body {
+    background-color: lightblue;
+}
+
+h1, p {
+    color: black;
+    text-align: center;
+}
+
+table {
+    border-spacing: 2px;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+table * {
+    position: relative;
+}
+
+table td {
+    padding-left: 8px;
+}
+
+table tr {
+    height: 20px;
+    background: antiquewhite;
+}
+
+table {
+    text-align: center;
+}
