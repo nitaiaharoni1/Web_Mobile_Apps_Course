@@ -11,16 +11,20 @@ app.use(session({
 
 //a.
 app.get('/start', function(req, res){
-    req.session.M = 0;
-    res.send(req.sessionID);
+    try{
+        req.session.M = 0;
+        res.status(200).send(req.sessionID);
+    } catch(e){
+        res.status(500).send(e);
+    }
 });
 
 //b.
 app.post('/calc/:uniqustring/add/:num', function(req, res){
     try{
         if(req.sessionID === req.params.uniqustring){
-            req.session.M += Number(req.params.num);
-            res.status(200).send(req.session.M.toString());
+            session.M += Number(req.params.num);
+            res.status(200).send(session.M.toString());
         } else{
             res.status(404).send(`Unknown uniqustring: ${req.params.uniqustring}`);
         }
@@ -112,7 +116,9 @@ app.delete('/calc/:uniqustring/del', function(req, res){
     }
 });
 
-const port = process.env.port || 3000;
+const port = process.env.port || 3100;
 app.listen(port, () => {
     console.log("App is listening on port: " + port)
 });
+
+module.exports = app;
