@@ -1,0 +1,66 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Instagram Style Application</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<header>
+    <div class="container">
+        <div class="profile">
+            <div class="profile-image">
+
+                <img src="https://i.imgflip.com/2/23ag7k.jpg" alt="">
+
+            </div>
+            <div class="profile-user-settings">
+                <h1 class="profile-user-name">nitaiaharoni</h1>
+                <br>
+
+                <input type='file' id="image_input" accept="image/*"/>
+                <input type="button" class="btn profile-add-btn" value="Add Picture" onclick="addPicture()"/>
+                <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog"
+                                                                                          aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="profile-stats">
+                <ul>
+                    <li><span class="profile-stat-count">164</span> posts</li>
+                    <li><span class="profile-stat-count">188</span> followers</li>
+                    <li><span class="profile-stat-count">206</span> following</li>
+                </ul>
+            </div>
+            <div class="profile-bio">
+                <p><span class="profile-real-name">Nitai Aharoni</span> User's Bio 📷✈️🏕️</p>
+            </div>
+        </div>
+    </div>
+</header>
+<main>
+    <div class="container">
+        <div id="gallery" class="gallery">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                     className="gallery-image">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1516956431828-b10b67f654d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+                     className="gallery-image">
+            </div>
+            <div class="gallery-item">
+                <img src="https://cdn.vox-cdn.com/thumbor/Or0rhkc1ciDqjrKv73IEXGHtna0=/0x0:666x444/1200x800/filters:focal(273x193:379x299)/cdn.vox-cdn.com/uploads/chorus_image/image/59384673/Macaca_nigra_self-portrait__rotated_and_cropped_.0.jpg"
+                     className="gallery-image">
+            </div>
+            <div class="gallery-item">
+                <img src="https://media.istockphoto.com/photos/banana-picture-id636739634?k=6&m=636739634&s=612x612&w=0&h=BQ9Z6DobjFzclh3LN7nKSljrRqycJPCq65CS8rtUHU4="
+                     className="gallery-image">
+            </div>
+
+
+        </div>
+        <div id="loader-parent">
+
+            <div class="loader" id="loader"></div>
+        </div>
+    </div>
+</main>
+<script src='./images.js' type='text/javascript'></script>
