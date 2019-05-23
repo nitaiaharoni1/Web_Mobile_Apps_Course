@@ -1,19 +1,16 @@
 const express = require('express'),
     app = express(),
-    session = require('express-session');
+    uniqid = require('uniqid');
 
 
-app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true
-}));
+let sessions = {};
 
 //a.
 app.get('/start', function(req, res){
     try{
-        req.session.M = 0;
-        res.status(200).send(req.sessionID);
+        let id = uniqid();
+        sessions[id] = 0;
+        res.status(200).send(id);
     } catch(e){
         res.status(500).send(e);
     }
@@ -22,9 +19,9 @@ app.get('/start', function(req, res){
 //b.
 app.post('/calc/:uniqustring/add/:num', function(req, res){
     try{
-        if(req.sessionID === req.params.uniqustring){
-            session.M += Number(req.params.num);
-            res.status(200).send(session.M.toString());
+        if(sessions[req.params.uniqustring] !== null){
+            sessions[req.params.uniqustring] += Number(req.params.num);
+            res.status(200).send(sessions[req.params.uniqustring].toString());
         } else{
             res.status(404).send(`Unknown uniqustring: ${req.params.uniqustring}`);
         }
@@ -36,9 +33,9 @@ app.post('/calc/:uniqustring/add/:num', function(req, res){
 //c.
 app.post('/calc/:uniqustring/sub/:num', function(req, res){
     try{
-        if(req.sessionID === req.params.uniqustring){
-            req.session.M -= Number(req.params.num);
-            res.status(200).send(req.session.M.toString());
+        if(sessions[req.params.uniqustring] !== null){
+            sessions[req.params.uniqustring] -= Number(req.params.num);
+            res.status(200).send(sessions[req.params.uniqustring].toString());
         } else{
             res.status(404).send(`Unknown uniqustring: ${req.params.uniqustring}`);
         }
@@ -50,9 +47,9 @@ app.post('/calc/:uniqustring/sub/:num', function(req, res){
 //d.
 app.put('/calc/:uniqustring/multiply/:num', function(req, res){
     try{
-        if(req.sessionID === req.params.uniqustring){
-            req.session.M *= Number(req.params.num);
-            res.status(200).send(req.session.M.toString());
+        if(sessions[req.params.uniqustring] !== null){
+            sessions[req.params.uniqustring] *= Number(req.params.num);
+            res.status(200).send(sessions[req.params.uniqustring].toString());
         } else{
             res.status(404).send(`Unknown uniqustring: ${req.params.uniqustring}`);
         }
@@ -64,9 +61,9 @@ app.put('/calc/:uniqustring/multiply/:num', function(req, res){
 //e.
 app.put('/calc/:uniqustring/divide/:num', function(req, res){
     try{
-        if(req.sessionID === req.params.uniqustring){
-            req.session.M /= Number(req.params.num);
-            res.status(200).send(req.session.M.toString());
+        if(sessions[req.params.uniqustring] !== null){
+            sessions[req.params.uniqustring] /= Number(req.params.num);
+            res.status(200).send(sessions[req.params.uniqustring].toString());
         } else{
             res.status(404).send(`Unknown uniqustring: ${req.params.uniqustring}`);
         }
@@ -78,8 +75,8 @@ app.put('/calc/:uniqustring/divide/:num', function(req, res){
 //f.
 app.get('/calc/:uniqustring/M', function(req, res){
     try{
-        if(req.sessionID === req.params.uniqustring){
-            res.status(200).send(req.session.M.toString());
+        if(sessions[req.params.uniqustring] !== null){
+            res.status(200).send(sessions[req.params.uniqustring].toString());
         } else{
             res.status(404).send(`Unknown uniqustring: ${req.params.uniqustring}`);
         }
@@ -91,9 +88,9 @@ app.get('/calc/:uniqustring/M', function(req, res){
 //g.
 app.post('/calc/:uniqustring/reset', function(req, res){
     try{
-        if(req.sessionID === req.params.uniqustring){
-            req.session.M = 0;
-            res.status(200).send(req.session.M.toString());
+        if(sessions[req.params.uniqustring] !== null){
+            sessions[req.params.uniqustring] = 0;
+            res.status(200).send(sessions[req.params.uniqustring].toString());
         } else{
             res.status(404).send(`Unknown uniqustring: ${req.params.uniqustring}`);
         }
@@ -105,8 +102,8 @@ app.post('/calc/:uniqustring/reset', function(req, res){
 //h.
 app.delete('/calc/:uniqustring/del', function(req, res){
     try{
-        if(req.sessionID === req.params.uniqustring){
-            req.session.destroy();
+        if(sessions[req.params.uniqustring] !== null){
+            delete sessions[req.params.uniqustring];
             res.status(200).send('Session was deleted!');
         } else{
             res.status(404).send(`Unknown uniqustring: ${req.params.uniqustring}`);
