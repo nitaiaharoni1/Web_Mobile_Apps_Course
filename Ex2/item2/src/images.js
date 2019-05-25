@@ -6,7 +6,7 @@ const pictures = ["https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?
 getPictures(pictures);
 
 function getPictures(pictures){
-    pictures.forEach(function(imgUrl){
+    pictures.forEach(async function(imgUrl){
         let gallery = document.getElementById("gallery");
         let div1 = document.createElement("div");
         div1.className = "gallery-item";

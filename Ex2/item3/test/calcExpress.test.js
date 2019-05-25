@@ -3,7 +3,8 @@ const assert = require('chai').assert,
     parallel = require('mocha.parallel'),
     app = require('../calcExpress');
 
-describe('calcExpress Test', function(){
+//run with mocha
+parallel('calcExpress Test', function(){
     let req = request(app);
 
     it('User1', async function(){
