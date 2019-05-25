@@ -1,50 +1,30 @@
-getPictures();
+const pictures = ["https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
+    "https://images.unsplash.com/photo-1516956431828-b10b67f654d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
+    "https://cdn.vox-cdn.com/thumbor/Or0rhkc1ciDqjrKv73IEXGHtna0=/0x0:666x444/1200x800/filters:focal(273x193:379x299)/cdn.vox-cdn.com/uploads/chorus_image/image/59384673/Macaca_nigra_self-portrait__rotated_and_cropped_.0.jpg",
+    "https://media.istockphoto.com/photos/banana-picture-id636739634?k=6&m=636739634&s=612x612&w=0&h=BQ9Z6DobjFzclh3LN7nKSljrRqycJPCq65CS8rtUHU4="];
 
-function getPictures(){
-    $.ajax({
-        type: 'GET',
-        url: 'http://localhost:3000/pictures'
-    }).done(function(data){
-        let pictures = data;
-        pictures.forEach(function(element, index){
-            let gallery = document.getElementById("gallery");
-            let div1 = document.createElement("div");
-            div1.className = "gallery-item";
-            div1.tabindex = "0";
+getPictures(pictures);
 
-            let img = document.createElement("IMG");
-            img.setAttribute("src", pictures[index]);
-            img.className = "gallery-image";
+function getPictures(pictures){
+    pictures.forEach(function(imgUrl){
+        let gallery = document.getElementById("gallery");
+        let div1 = document.createElement("div");
+        div1.className = "gallery-item";
+        div1.tabindex = "0";
 
-            div1.appendChild(img);
-            gallery.appendChild(div1);
-        });
-        let loader = document.getElementById("loader");
-        loader.style.visibility = "hidden"
+        let img = document.createElement("IMG");
+        img.setAttribute("src", imgUrl);
+        img.className = "gallery-image";
 
-    }).fail(function(){
-        alert("error");
+        div1.appendChild(img);
+        gallery.appendChild(div1);
     });
+    let loader = document.getElementById("loader");
+    loader.style.visibility = "hidden"
 }
 
 function addPicture(){
-    let form_data = new FormData();
-    let image_file = document.getElementById("image_input").files[0];
-    form_data.append("image_file", image_file);
-
-    jQuery.ajax({
-        url: "http://localhost:3000/picture",
-        type: "POST",
-        data: form_data,
-        processData: false,
-        contentType: false,
-        success: function(data){
-            console.log("Picture: " + image_file.name + " was added")
-        },
-        error: function(e){
-            console.log("Error: " + e)
-        },
-    });
-
-    location.reload();
+    let image_input = document.getElementById("image_input");
+    getPictures([image_input.value]);
+    image_input.value = '';
 }
