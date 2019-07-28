@@ -1,15 +1,19 @@
 import React from 'react';
 import './App.css';
-import { Nav, Home, About } from './components'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Header, Home, About, Delivery } from './components'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 function App() {
     return (
         <Router>
             <div className="App">
-                <Nav/>
-                <Home/>
-                <About/>
+                <Header/>
+                <Switch>
+                    <Route path="/about" component={About}/>
+                    <Route path="/delivery" component={Delivery}/>
+                    <Route path="/" component={Home}/>
+                </Switch>
             </div>
         </Router>
 
