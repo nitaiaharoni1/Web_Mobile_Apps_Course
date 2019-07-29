@@ -12,7 +12,7 @@ class Jumbo extends Component {
         return (
             <Jumbotron style={Style} fluid>
                 <h1 className='text-center text-light display-3'>Fluid jumbotron</h1>
-                <p className='text-center text-light'>
+                <p className='lead text-center text-light'>
                     This is a modified jumbotron that occupies the entire horizontal space of
                     its parent.
                 </p>
